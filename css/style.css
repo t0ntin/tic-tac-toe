@@ -9,9 +9,6 @@
   box-sizing: border-box;
 }
 
-:root {
-
-}
 
 html {
   height: 100%;
@@ -48,16 +45,20 @@ a {
   text-decoration: none;
 }
 
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
 main {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 
-  1fr
-  1fr
-  50px 
-  50px;
-  gap: 15px;
+  display: flex;
   justify-items: center;
+  gap: 30px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
 }
 
 .gameboard-div {
@@ -65,15 +66,12 @@ main {
   height: 300px;
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  /* border: 1px solid white; */
   grid-row: 1/4;
-
 }
 
 .box {
   width: 92px;
   height: 92px;
-  /* padding-bottom: 30%; */
   display: grid;
   justify-content: center;
   align-content: center;
@@ -86,11 +84,10 @@ main {
   text-shadow: 2px 2px 3px rgb(197, 197, 197);
   background: linear-gradient(
     45deg,
-    rgb(0, 0, 0) 0%,
-    rgb(4, 134, 21) 50%,
-    rgb(49, 49, 49) 100%
+    rgb(58, 0, 0) 0%,
+    rgb(94, 2, 2) 50%,
+    rgb(39, 1, 1) 100%
   );
-  /* border: 1px solid rgb(62, 255, 44); */
   border-radius: 3px;
   box-shadow: 3px 3px 4px rgb(82, 82, 82);
   transition: .2s text-shadow;
@@ -107,36 +104,35 @@ main {
 .box:active {
   box-shadow: 3px 3px 10px rgb(255, 94, 94);
   border-bottom: 1px solid rgb(251, 248, 53);
-  /* text-shadow: none; */
   box-shadow: 3px 3px 5px rgb(255, 255, 255);
 }
 
+
 .reset-btn {
-  grid-column: 1/2;
-  grid-row: 5/6;
-  /* width: 80px; */
-  /* height: 60px; */
+  margin-top: 10px;
+  width: 80px;
   transition: box-shadow background-color 0.2s linear;
-  font-size: 2rem;
+  font-size: 1.6rem;
   padding: 0.5rem;
   background: linear-gradient(
     90deg,
-    rgb(0, 0, 0) 0%,
-    rgb(12, 4, 126) 50%,
-    rgb(5, 21, 171) 100%
+    rgb(75, 2, 2) 0%,
+    rgb(126, 4, 4) 50%,
+    rgb(171, 5, 5) 100%
   );
   color: rgb(134, 205, 247);
-  border: 1px solid rgb(90, 233, 252);
-  border-radius: 3px;
+  border: none;
+  border-radius: 14px;
   box-shadow: 2px 2px 3px rgb(85, 85, 85);
-  transition: .2s text-shadow;
+  transition: .1s text-shadow;
   cursor: pointer;
+
 }
 
 .reset-btn:hover {
-  font-weight: bold;
   color: white;
   text-shadow: 2px 2px 3px rgb(74, 192, 247);
+  
 }
 
 .reset-btn:active {
@@ -146,27 +142,86 @@ main {
   color: rgb(183, 183, 185);
 }
 
-
-
 .display {
-  /* border: 1px solid white; */
+  margin: 15px 0;
   height: 35px;
   width: 300px;
-  font-size: 1.3rem;
-  grid-column: 1/2;
-  grid-row: 4/5;
+  font-size: 1.7rem;
+
   text-align: center;
 
 }
 
 .player1-container {
-  grid-column: 2/3;
-  grid-row: 1/2;
-  max-width: 200px
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .player2-container {
+  margin-top: 15px;
   grid-column: 2/3;
-  max-width: 200px
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
+}
+
+.player1-container span, .player2-container span {
+  font-family: 'Frijole', cursive;
+  font-size: 2rem;
+}
+
+.player1-container span {
+  color: black;
+  text-shadow: 2px 2px 3px rgb(197, 197, 197);
+}
+
+.player2-container span {
+  color: #df0202;
+  text-shadow: 2px 2px 3px rgb(197, 197, 197);
+}
+
+.player1-label, .player2-label {
+  font-size: 1.6rem;
+  font-weight: bold;
+  width: 100%;
+  
+}
+
+input {
+  background-color: #303245;
+  border-radius: 12px;
+  border: 0;
+  color: #eee;
+  font-size: 1.5rem;
+  outline: none;
+  padding: 4px 20px 5px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.start-btn {
+  display: inline-block;
+  width: 150px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 15px;
+  cursor: pointer;
+  background-color: rgb(11, 95, 3);
+  color: white;
+  border: none;
+}
+
+.start-btn:hover {
+  background-color: rgb(4, 165, 4);
+}
+
+.start-btn:active {
+  opacity: .5;
 }

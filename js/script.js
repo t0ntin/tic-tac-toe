@@ -1,31 +1,38 @@
-(function () {
+const ticTacToe = (function () {
   const gameboard = {
     gameboard: [
       ["", "", ""],
       ["", "", ""],
       ["", "", ""],
     ],
+
+    p1Name: "",
+    p2Name: "",
+    player1: "",
+    player2: "",
     player1Turn: true,
-    xIsWinner: undefined,
     init: function () {
       this.cacheDom();
       this.render();
-      // this.bindEvents();
     },
 
     cacheDom: function () {
       this.gameboardDiv = document.querySelector(".gameboard-div");
       this.display = document.querySelector(".display");
       this.resetBtn = document.querySelector(".reset-btn");
+      this.p1El = document.querySelector(".player1-el");
+      this.p2El = document.querySelector(".player2-el");
+      this.startBtn = document.querySelector(".start-btn");
     },
 
-    bindEvents: function () {},
-
     render: function () {
+      this.start();
+      this.Player();
+      this.createPlayers();
       this.createGrid();
+      this.changeP2Color();
       this.handleLetterChoice();
       this.resetGame();
-      // this.bindEvents();
     },
 
     createGrid: function () {
@@ -39,9 +46,29 @@
       }
     },
 
+    start: function () {
+      this.startBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.p1Name = gameboard.p1El.value;
+        this.p2Name = gameboard.p2El.value;
+        console.log(this.p2El);
+        console.log(this.p1Name);
+        this.createPlayers();
+        this.display.innerText = `${this.p1Name}, place an 'x' on the board.`;
+      });
+    },
+
+    Player: function (name, letter) {
+      return { name, letter };
+    },
+
+    createPlayers: function () {
+      this.player1 = this.Player(this.p1Name, "x");
+      this.player2 = this.Player(this.p2Name, "o");
+    },
+
     handleLetterChoice: function () {
       boxes = document.querySelectorAll(".box");
-      // console.log(gameboard.boxes);
       boxes.forEach((box) => {
         box.addEventListener(
           "click",
@@ -95,7 +122,6 @@
       }
     },
 
-
     checkForColMatch: function () {
       let x = ["x", "x", "x"];
       let o = ["o", "o", "o"];
@@ -104,8 +130,8 @@
         let column = [];
         for (let col = 0; col < this.gameboard.length; col++) {
           column.push(this.gameboard[col][row]);
-          console.log(`[col][row] ${this.gameboard[col][row]}`);
-          console.log(`column: ${column}`);
+          // console.log(`[col][row] ${this.gameboard[col][row]}`);
+          // console.log(`column: ${column}`);
         }
         const element = this.gameboard[row];
 
@@ -170,29 +196,30 @@
     },
 
     updateDisplay: function () {
+      if (!this.p1Name) {
+        return;
+      }
       if (gameboard.player1Turn === true) {
-        this.display.innerText = `${player1.name}, it's your turn.`;
+        this.display.innerText = `${this.player1.name}, it's your turn.`;
       }
       if (gameboard.player1Turn === false) {
-        this.display.innerText = `${player2.name}, it's your turn.`;
+        this.display.innerText = `${this.player2.name}, it's your turn.`;
       }
-      if (this.checkForRowMatch() && gameboard.player1Turn === false) {
-        this.display.innerText = `${player1.name}, You have won the game!`;
+      if (
+        (this.checkForRowMatch() ||
+          this.checkForColMatch() ||
+          this.checkForDiagonalMatch()) &&
+        gameboard.player1Turn === false
+      ) {
+        this.display.innerText = `${this.player1.name}, you have won the game! Press the reset button to play again.`;
       }
-      if (this.checkForRowMatch() && gameboard.player1Turn === true) {
-        this.display.innerText = `${player2.name}, You have won the game!`;
-      }
-      if (this.checkForColMatch() && gameboard.player1Turn === false) {
-        this.display.innerText = `${player1.name}, You have won the game!`
-      }
-      if (this.checkForColMatch() && gameboard.player1Turn === true) {
-        this.display.innerText = `${player2.name}, You have won the game!`;
-      }
-      if (this.checkForDiagonalMatch() && gameboard.player1Turn === false) {
-        this.display.innerText = `${player1.name}, You have won the game!`
-      }
-      if (this.checkForDiagonalMatch() && gameboard.player1Turn === true) {
-        this.display.innerText = `${player2.name}, You have won the game!`;
+      if (
+        (this.checkForRowMatch() ||
+          this.checkForColMatch() ||
+          this.checkForDiagonalMatch()) &&
+        gameboard.player1Turn === true
+      ) {
+        this.display.innerText = `${this.player2.name}, Press the reset button to play again.`;
       }
     },
 
@@ -200,16 +227,25 @@
       for (let i = 0; i < this.gameboard.length; i++) {
         this.gameboard[i] = new Array(this.gameboard[i].length).fill("");
       }
-      console.log(this.gameboard);
     },
 
-    announceWinner: function () {},
+    changeP2Color: function () {
+      boxes = document.querySelectorAll(".box");
+      boxes.forEach((box) => {
+        box.addEventListener("click", function () {
+          if (gameboard.player1Turn === false) {
+            box.style.color = "#df0202";
+          }
+        });
+      });
+    },
 
     resetGame: function () {
       boxes = document.querySelectorAll(".box");
       this.resetBtn.addEventListener("click", function () {
         boxes.forEach((box) => {
           box.innerText = "";
+          box.style.color = "black";
         });
         gameboard.player1Turn = true;
         gameboard.disableButtons();
@@ -219,13 +255,5 @@
     },
   };
 
-  // return {createGrid, updateDisplay, handleLetterChoice,}
   gameboard.init();
 })();
-
-const Player = (name, letter) => {
-  return { name, letter };
-};
-
-const player1 = Player("Player 1", "x");
-const player2 = Player("Player 2", "o");

@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frijole&display=swap" rel="stylesheet">
-  <script src="./js/script.js"defer></script>
-  <title>Tic-Tac-Toe</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Frijole&display=swap"
+      rel="stylesheet"
+    />
+    <script src="./js/script.js" defer></script>
+    <title>Tic-Tac-Toe</title>
+  </head>
+  <body>
     <h2>tic-tac-toe</h2>
-<main>
+    <main>
+      <div class="left-side">
         <div class="gameboard-div"></div>
-      <div class="display"></div>
-      <button class="reset-btn">Reset</button>
-      <div class="player1-container">
-        <label for="" class="player1">Player 1: enter your name.</label>
-        <input class="player1" type="text" name="player1">
+        <div class="display">Enter both player names and press start.</div>
       </div>
 
-      <div class="player2-container">
-        <label for="" class="player2">Player 2: enter your name.</label>
-        <input class="player2" type="text" name="player2">
+      <div class="right-side">
+        <div class="player1-container">
+          <label for="" class="player1-label"
+            ><span>Player 1,</span> enter your name:</label
+          >
+          <input class="player1-el" type="text" name="player1" />
+        </div>
+
+        <div class="player2-container">
+          <label for="" class="player2-label"
+            ><span>Player 2,</span> enter your name:</label
+          >
+          <input class="player2-el" type="text" name="player2" />
+          <button class="start-btn" type="submit">Start!</button>
+          <button class="reset-btn">Reset</button>
+        </div>
       </div>
-
-</main>
-
-  
-
-</body>
+    </main>
+  </body>
 </html>
-
-
