@@ -100,8 +100,9 @@ const ticTacToe = (function () {
               gameboard.updateDisplay();
               gameboard.checkForTie();
             }
-          }),
-          false
+          }),{once: true}
+
+
         );
       });
     },
@@ -133,7 +134,7 @@ const ticTacToe = (function () {
           // console.log(`[col][row] ${this.gameboard[col][row]}`);
           // console.log(`column: ${column}`);
         }
-        const element = this.gameboard[row];
+        // const element = this.gameboard[row];
 
         if (
           JSON.stringify(column) === JSON.stringify(x) ||
@@ -152,9 +153,9 @@ const ticTacToe = (function () {
       let leftToRight = [];
       let rightToLeft = [];
       for (let i = 0; i < this.gameboard.length; i++) {
-        //  console.log(this.gameboard[i][i]);
+         console.log(this.gameboard[i][i]);
         leftToRight.push(this.gameboard[i][i]);
-        // console.log(leftToRight);
+        console.log(leftToRight);
         rightToLeft.push(this.gameboard[i][this.gameboard.length - i - 1]);
       }
       if (leftToRight.every(XMatch) || leftToRight.every(OMatch)) {
@@ -188,9 +189,9 @@ const ticTacToe = (function () {
 
     disableButtons: function () {
       boxes = document.querySelectorAll(".box");
-      console.log(boxes);
+      // console.log(boxes);
       boxes.forEach((box) => {
-        box.removeEventListener("click", box.fn, false);
+        box.removeEventListener("click", box.fn);
         console.log("buttons disabled");
       });
     },
@@ -219,7 +220,7 @@ const ticTacToe = (function () {
           this.checkForDiagonalMatch()) &&
         gameboard.player1Turn === true
       ) {
-        this.display.innerText = `${this.player2.name}, Press the reset button to play again.`;
+        this.display.innerText = `${this.player2.name}, you have won the game! Press the reset button to play again.`;
       }
     },
 
@@ -233,9 +234,10 @@ const ticTacToe = (function () {
       boxes = document.querySelectorAll(".box");
       boxes.forEach((box) => {
         box.addEventListener("click", function () {
-          if (gameboard.player1Turn === false) {
+          if (gameboard.player1Turn === false && box.innerText !== 'x') {
             box.style.color = "#df0202";
           }
+          
         });
       });
     },
